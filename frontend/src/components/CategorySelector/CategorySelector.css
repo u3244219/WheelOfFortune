@@ -1,0 +1,90 @@
+/* CategorySelector Styles */
+
+.category-selector {
+  padding: 2rem;
+  text-align: center;
+}
+
+.category-selector h2 {
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.category-selector.loading,
+.category-selector.error {
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.category-selector.error {
+  color: #e74c3c;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.category-button {
+  padding: 1.5rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* TV Display Optimization - Large Screens */
+@media (min-width: 1920px) {
+  .category-selector {
+    padding: 4rem;
+  }
+
+  .category-selector h2 {
+    font-size: 3.5rem;
+    margin-bottom: 4rem;
+    font-weight: 700;
+  }
+
+  .category-selector.loading,
+  .category-selector.error {
+    padding: 5rem;
+    font-size: 2rem;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .category-button {
+    padding: 2.5rem 3.5rem;
+    font-size: 1.7rem;
+    border-radius: 20px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+  }
+}
+

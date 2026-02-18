@@ -1,0 +1,210 @@
+/* GameBoard Styles with Side Panel Layout (Horse Race TV Style) */
+
+.game-board {
+  min-height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 100%;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 1rem;
+  padding: 0 1rem;
+}
+
+.game-header h1 {
+  color: white;
+  font-size: 2rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.new-game-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: white;
+  color: #667eea;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.new-game-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.new-game-btn:active {
+  transform: translateY(0);
+}
+
+/* Main Container with Side Panel */
+.game-container {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  align-items: flex-start;
+  padding: 0 1rem;
+}
+
+/* Side Panel - Scoreboard (Horse Race Style) */
+.side-panel {
+  flex: 0 0 300px;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.multiplayer-message {
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 90%;
+  background: rgba(255, 255, 255, 0.95);
+  border-left: 4px solid #3498db;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.game-loading {
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  padding: 3rem;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* TV Display Optimization - Large Screens */
+@media (min-width: 1920px) {
+  .game-board {
+    padding: 2rem;
+  }
+
+  .game-header {
+    padding: 0 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .game-header h1 {
+    font-size: 3rem;
+  }
+
+  .new-game-btn {
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+  }
+
+  .game-container {
+    padding: 0 2rem;
+    gap: 2rem;
+  }
+
+  .side-panel {
+    flex: 0 0 550px;
+  }
+
+  .main-content {
+    padding: 2rem;
+    border-radius: 25px;
+  }
+
+  .multiplayer-message {
+    font-size: 1.4rem;
+    padding: 1.5rem;
+  }
+
+  .game-loading {
+    font-size: 2rem;
+    padding: 4rem;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .game-container {
+    flex-direction: column;
+  }
+
+  .side-panel {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    max-height: none;
+    order: 2;
+  }
+
+  .main-content {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-board {
+    padding: 0.5rem;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .game-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+

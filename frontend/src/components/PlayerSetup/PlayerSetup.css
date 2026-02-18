@@ -1,0 +1,202 @@
+/* PlayerSetup Styles */
+
+.player-setup {
+  width: 90%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.player-setup h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.setup-section {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.setup-section label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.player-count-select {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.player-count-select:hover {
+  border-color: #764ba2;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.player-count-select:focus {
+  outline: none;
+  border-color: #764ba2;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.players-list {
+  margin: 2rem 0;
+}
+
+.players-list h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.player-input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.player-input-group label {
+  min-width: 100px;
+  color: #555;
+  font-weight: 600;
+}
+
+.player-name-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.player-name-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.player-name-input:hover {
+  border-color: #667eea;
+}
+
+.start-game-button {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.start-game-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.start-game-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.start-game-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .player-setup {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .player-input-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .player-input-group label {
+    min-width: auto;
+  }
+}
+
+/* TV Display Optimization - Large Screens */
+@media (min-width: 1920px) {
+  .player-setup {
+    width: 95%;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 3rem;
+    border-radius: 30px;
+  }
+
+  .player-setup h2 {
+    font-size: 2.8rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .setup-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .setup-section label {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .player-count-select {
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+    border-width: 3px;
+    border-radius: 12px;
+  }
+
+  .players-list h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .player-input-group {
+    margin-bottom: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .player-input-group label {
+    min-width: 120px;
+    font-size: 1.3rem;
+  }
+
+  .player-name-input {
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    border-width: 2px;
+    border-radius: 12px;
+  }
+
+  .start-game-button {
+    padding: 1.3rem 2.5rem;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    border-radius: 15px;
+  }
+}
+

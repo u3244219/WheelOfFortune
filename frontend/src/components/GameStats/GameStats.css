@@ -1,0 +1,182 @@
+/* GameStats Styles */
+
+.game-stats {
+  margin: 2rem auto;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.attempts-section {
+  text-align: center;
+}
+
+.attempts-section h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.attempts-display {
+  margin: 1rem 0;
+}
+
+.attempts-count {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #27ae60;
+  transition: color 0.3s ease;
+}
+
+.attempts-count.warning {
+  color: #e74c3c;
+  animation: pulse 1s infinite;
+}
+
+.attempts-bar {
+  width: 100%;
+  height: 20px;
+  background: #ecf0f1;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.attempts-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.attempts-fill.warning {
+  background: linear-gradient(90deg, #c0392b, #e74c3c);
+}
+
+.incorrect-section {
+  text-align: center;
+}
+
+.incorrect-section h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.incorrect-letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.incorrect-letter {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.game-message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-left: 4px solid #3498db;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .attempts-count {
+    font-size: 1.5rem;
+  }
+
+  .incorrect-letter {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 1rem;
+  }
+}
+
+/* TV Display Optimization - Large Screens */
+@media (min-width: 1920px) {
+  .game-stats {
+    margin: 4rem auto;
+    padding: 0 3rem;
+  }
+
+  .stats-container {
+    gap: 3rem;
+  }
+
+  .attempts-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .attempts-count {
+    font-size: 4rem;
+    font-weight: bold;
+  }
+
+  .attempts-bar {
+    height: 50px;
+    border-radius: 20px;
+    margin-top: 1.5rem;
+  }
+
+  .incorrect-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .incorrect-letters {
+    gap: 1.5rem;
+  }
+
+  .incorrect-letter {
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    font-size: 1.8rem;
+    border-radius: 15px;
+    font-weight: bold;
+  }
+
+  .game-message {
+    margin-top: 2rem;
+    padding: 2rem;
+    font-size: 1.6rem;
+    border-left-width: 6px;
+    border-radius: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+}
+
