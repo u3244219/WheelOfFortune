@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://u3244219.github.io/WheelOfFotune",
+  "homepage": "https://u3244219.github.io/WheelOfFortune",
   "dependencies": {
     "axios": "^1.13.2",
     "react": "^19.2.0",

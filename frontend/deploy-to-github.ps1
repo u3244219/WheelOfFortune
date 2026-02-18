@@ -18,19 +18,19 @@ $username = Read-Host
 # Update package.json with correct homepage
 Write-Host "`nUpdating homepage URL..." -ForegroundColor Yellow
 $packageJson = Get-Content "package.json" -Raw
-$packageJson = $packageJson -replace '"homepage": "https://YOUR_GITHUB_USERNAME\.github\.io/WheelOfFotune"', "`"homepage`": `"https://$username.github.io/WheelOfFotune`""
+$packageJson = $packageJson -replace '"homepage": "https://YOUR_GITHUB_USERNAME\.github\.io/WheelOfFortune"', "`"homepage`": `"https://$username.github.io/WheelOfFortune`""
 $packageJson | Set-Content "package.json" -NoNewline
 
-Write-Host "✓ Homepage updated to: https://$username.github.io/WheelOfFotune" -ForegroundColor Green
+Write-Host "✓ Homepage updated to: https://$username.github.io/WheelOfFortune" -ForegroundColor Green
 
 # Ask if remote is already set
-Write-Host "`nHave you created a GitHub repository named 'WheelOfFotune'? (y/n)" -ForegroundColor Cyan
+Write-Host "`nHave you created a GitHub repository named 'WheelOfFortune'? (y/n)" -ForegroundColor Cyan
 $created = Read-Host
 
 if ($created -eq 'y') {
     Write-Host "`nAdding remote origin..." -ForegroundColor Yellow
     try {
-        git remote add origin "https://github.com/$username/WheelOfFotune.git" 2>$null
+        git remote add origin "https://github.com/$username/WheelOfFortune.git" 2>$null
     } catch {
         Write-Host "Remote already exists, skipping..." -ForegroundColor Gray
     }
@@ -44,12 +44,12 @@ if ($created -eq 'y') {
 
     Write-Host "`n✅ DEPLOYMENT COMPLETE!" -ForegroundColor Green
     Write-Host "`nYour game will be live at:" -ForegroundColor Cyan
-    Write-Host "https://$username.github.io/WheelOfFotune`n" -ForegroundColor White
+    Write-Host "https://$username.github.io/WheelOfFortune`n" -ForegroundColor White
     Write-Host "Wait 1-2 minutes, then visit the URL above!" -ForegroundColor Yellow
 } else {
     Write-Host "`n📝 Next steps:" -ForegroundColor Yellow
     Write-Host "1. Go to: https://github.com/new" -ForegroundColor White
-    Write-Host "2. Repository name: WheelOfFotune" -ForegroundColor White
+    Write-Host "2. Repository name: WheelOfFortune" -ForegroundColor White
     Write-Host "3. Make it Public" -ForegroundColor White
     Write-Host "4. Click 'Create repository'" -ForegroundColor White
     Write-Host "5. Run this script again and answer 'y'`n" -ForegroundColor White
