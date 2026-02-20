@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Test - Wheel of Fortune</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        h1 { text-align: center; }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        button {
+            padding: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .status {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+        }
+        .info {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔊 Sound Effects Test</h1>
+    <p style="text-align: center;">Click buttons to test procedural sounds (Web Audio API)</p>
+
+    <div class="info">
+        <strong>ℹ️ Current Setup:</strong> Using procedural sounds generated with Web Audio API.<br>
+        These are simple beeps and tones that work without MP3 files.<br>
+        For better quality, add real MP3 files to <code>public/sounds/</code>
+    </div>
+
+    <div class="test-grid">
+        <button onclick="testSound('buttonClick')">🖱️ Button Click</button>
+        <button onclick="testSound('letterCorrect')">✅ Correct Letter</button>
+        <button onclick="testSound('letterWrong')">❌ Wrong Letter</button>
+        <button onclick="testSound('letterFlip')">🔄 Letter Flip</button>
+        <button onclick="testSound('wheelTick')">⚙️ Wheel Tick</button>
+        <button onclick="testSound('puzzleSolved')">🏆 Victory!</button>
+        <button onclick="testSound('gameOver')">💀 Game Over</button>
+        <button onclick="testSound('bigWin')">💎 Big Win</button>
+    </div>
+
+    <div class="status" id="status">
+        Ready to test sounds!
+    </div>
+
+    <script>
+        // Procedural sound generator
+        const ProceduralSound = {
+            context: null,
+
+            getContext() {
+                if (!this.context) {
+                    this.context = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                return this.context;
+            },
+
+            playBeep(frequency, duration, type = 'sine', volume = 0.3) {
+                const ctx = this.getContext();
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+
+                gainNode.gain.setValueAtTime(volume, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + duration);
+            },
+
+            buttonClick() {
+                this.playBeep(600, 0.05, 'square', 0.2);
+            },
+
+            letterCorrect() {
+                this.playBeep(800, 0.1, 'sine', 0.3);
+                setTimeout(() => this.playBeep(1000, 0.08, 'sine', 0.25), 50);
+            },
+
+            letterWrong() {
+                this.playBeep(200, 0.3, 'sawtooth', 0.25);
+            },
+
+            letterFlip() {
+                this.playBeep(400, 0.08, 'triangle', 0.2);
+            },
+
+            wheelTick() {
+                this.playBeep(1200, 0.02, 'square', 0.15);
+            },
+
+            puzzleSolved() {
+                this.playBeep(523, 0.2, 'sine', 0.3); // C
+                setTimeout(() => this.playBeep(659, 0.2, 'sine', 0.3), 150); // E
+                setTimeout(() => this.playBeep(784, 0.3, 'sine', 0.35), 300); // G
+            },
+
+            gameOver() {
+                this.playBeep(400, 0.15, 'sawtooth', 0.25);
+                setTimeout(() => this.playBeep(350, 0.15, 'sawtooth', 0.25), 150);
+                setTimeout(() => this.playBeep(300, 0.2, 'sawtooth', 0.25), 300);
+            },
+
+            bigWin() {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => this.playBeep(800 + i * 100, 0.15, 'sine', 0.3), i * 100);
+                }
+            }
+        };
+
+        function testSound(soundName) {
+            const status = document.getElementById('status');
+            status.innerHTML = `🔊 Playing: <strong>${soundName}</strong>`;
+
+            if (ProceduralSound[soundName]) {
+                ProceduralSound[soundName]();
+                setTimeout(() => {
+                    status.innerHTML = `✅ Played: <strong>${soundName}</strong>`;
+                }, 1000);
+            } else {
+                status.innerHTML = `❌ Sound not found: ${soundName}`;
+            }
+        }
+    </script>
+</body>
+</html>
+
