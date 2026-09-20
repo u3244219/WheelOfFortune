@@ -45,13 +45,12 @@ const GameResult = ({ status, maskedWord, answer, category, hint, onPlayAgain, o
         />
       )}
       <div className="result-modal">
-        <div className="result-icon">
-          {isWon ? '🎉' : '😢'}
+        <div className="result-header">
+          <span className="result-icon">{isWon ? '🎉' : '😢'}</span>
+          <h2 className="result-title">
+            {isWon ? 'Congratulations!' : 'Game Over!'}
+          </h2>
         </div>
-
-        <h2 className="result-title">
-          {isWon ? 'Congratulations!' : 'Game Over!'}
-        </h2>
 
 
         <AnswerReveal

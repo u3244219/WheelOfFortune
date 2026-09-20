@@ -19,9 +19,9 @@
   border-radius: 20px;
   /* Sized against the viewport so the whole card fits on a television and a
      phone without scrolling - the buttons used to fall below the fold. */
-  padding: clamp(0.9rem, 2.4vh, 2rem);
+  padding: clamp(0.8rem, 2vh, 1.5rem);
   padding-bottom: 0;
-  max-width: 550px;
+  max-width: 900px;
   width: 90%;
   text-align: center;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -32,16 +32,27 @@
   flex-direction: column;
 }
 
+/* The heading is a small chip, not a banner - on a television the picture
+   should be the thing you look at, not the word "Congratulations". */
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .result-icon {
-  font-size: clamp(1.8rem, 4.6vh, 3.5rem);
-  margin-bottom: 0.2rem;
+  font-size: clamp(1.1rem, 2.6vh, 1.6rem);
+  margin: 0;
   animation: bounce 0.6s ease;
 }
 
 .result-title {
   color: #2c3e50;
-  font-size: clamp(1.2rem, 3.2vh, 2.2rem);
-  margin-bottom: 0.35rem;
+  font-size: clamp(1rem, 2.6vh, 1.5rem);
+  margin: 0;
+  letter-spacing: 0.02em;
 }
 
 .game-result.won .result-title {
@@ -70,16 +81,19 @@
 }
 
 .final-scores {
-  margin: 0.4rem 0;
-  padding: 0.5rem;
+  margin: 0.5rem 0 0;
+  padding: 0.45rem 0.6rem;
   background: #f8f9fa;
   border-radius: 10px;
 }
 
 .final-scores h3 {
   color: #2c3e50;
-  margin-bottom: 0.3rem;
-  font-size: 1.05rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.65;
 }
 
 .final-score-item {
@@ -315,13 +329,21 @@
   bottom: 0;
   margin-top: auto;
   background: white;
-  padding: 0.6rem 0 clamp(0.6rem, 2vh, 1.2rem);
+  padding: 0.55rem 0 clamp(0.6rem, 2vh, 1rem);
   box-shadow: 0 -10px 14px -10px rgba(0, 0, 0, 0.18);
+  display: flex;
+  gap: 0.6rem;
 }
 
-@media (max-height: 820px) {
-  .result-icon { font-size: 1.6rem; }
-  .final-scores { margin: 0.3rem 0; }
+.result-actions .btn {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+}
+
+/* Landscape: buttons sit side by side instead of stacking. */
+@media (min-width: 700px) {
+  .result-actions { flex-direction: row; }
 }
 
 @media (max-width: 420px) {
