@@ -3,6 +3,8 @@
  * Manages in-memory word database (SQL-free implementation)
  */
 
+import { dealNextWord } from './wordDeck';
+
 class DatabaseService {
   constructor() {
     this.words = [];
@@ -38,7 +40,9 @@ class DatabaseService {
 
         // Parse INSERT statements using regex
         const insertPattern = /INSERT INTO words \(category, word, hint, difficulty\) VALUES\s+([\s\S]*?);/gi;
-        const valuePattern = /\('([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)'\)/g;
+        // Values may contain escaped quotes ('') - match those too, otherwise
+        // every word with an apostrophe in its hint is silently dropped.
+        const valuePattern = /\('((?:[^']|'')+)',\s*'((?:[^']|'')*)',\s*'((?:[^']|'')*)',\s*'([A-Z]+)'\)/g;
 
         let match;
         while ((match = insertPattern.exec(dataSQL)) !== null) {
@@ -98,16 +102,16 @@ class DatabaseService {
       await this.initialize();
     }
 
-    const availableWords = this.words.filter(
-      word => word.category === category && !excludeIds.includes(word.id)
-    );
+    const inCategory = this.words.filter(word => word.category === category);
 
-    if (availableWords.length === 0) {
+    if (inCategory.length === 0) {
       throw new Error('No words found for category: ' + category);
     }
 
-    const randomIndex = Math.floor(Math.random() * availableWords.length);
-    return availableWords[randomIndex];
+    // Prefer words not yet played this session; if the session has seen them
+    // all, fall back to the full category so the deck can still deal.
+    const unplayed = inCategory.filter(word => !excludeIds.includes(word.id));
+    return dealNextWord(category, unplayed.length ? unplayed : inCategory);
   }
 
   /**
