@@ -1,9 +1,13 @@
 /**
  * GameBoard Component
  * Main game container with side-panel scoreboard layout (like horse race TV screen)
+ * Now with mobile drawer for scoreboard
  */
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useDevice } from '../../contexts/DeviceContext';
+import MobileDrawer from '../MobileDrawer/MobileDrawer';
+import PrizeWheel from '../PrizeWheel/PrizeWheel';
 import './GameBoard.css';
 import WordDisplay from '../WordDisplay/WordDisplay';
 import Keyboard from '../Keyboard/Keyboard';
@@ -12,7 +16,19 @@ import GameResult from '../GameResult/GameResult';
 import Scoreboard from '../Scoreboard/Scoreboard';
 import { GAME_STATUS, GAME_CONSTANTS } from '../../constants/gameConstants';
 
-const GameBoard = ({ gameState, onLetterClick, onPlayAgain, onNewCategory, loading, letterPoints }) => {
+const GameBoard = ({
+  gameState,
+  onLetterClick,
+  onPlayAgain,
+  onNewCategory,
+  loading,
+  letterPoints,
+  showPrizeWheel,
+  onWheelSpinComplete
+}) => {
+  const { isMobile } = useDevice();
+  const [showMobileScoreboard, setShowMobileScoreboard] = useState(false);
+
   const { status, maskedWord, category, hint, difficulty, guessedLetters, incorrectLetters, remainingAttempts, message, players, currentPlayerIndex } = gameState;
 
   const isGameActive = status === GAME_STATUS.PLAYING;
@@ -37,14 +53,38 @@ const GameBoard = ({ gameState, onLetterClick, onPlayAgain, onNewCategory, loadi
       </div>
 
       <div className="game-container">
-        {/* Side Panel - Scoreboard (like horse race TV) */}
-        {players.length > 0 && (
+        {/* Side Panel - Scoreboard (desktop/TV only) */}
+        {players.length > 0 && !isMobile && (
           <div className="side-panel">
             <Scoreboard
               players={players}
               currentPlayerIndex={currentPlayerIndex}
             />
           </div>
+        )}
+
+        {/* Mobile Scoreboard Button */}
+        {players.length > 0 && isMobile && (
+          <button
+            className="mobile-scoreboard-btn"
+            onClick={() => setShowMobileScoreboard(true)}
+          >
+            📊 View Scores
+          </button>
+        )}
+
+        {/* Mobile Scoreboard Drawer */}
+        {isMobile && (
+          <MobileDrawer
+            isOpen={showMobileScoreboard}
+            onClose={() => setShowMobileScoreboard(false)}
+            position="bottom"
+          >
+            <Scoreboard
+              players={players}
+              currentPlayerIndex={currentPlayerIndex}
+            />
+          </MobileDrawer>
         )}
 
         {/* Main Content Area */}
@@ -80,6 +120,14 @@ const GameBoard = ({ gameState, onLetterClick, onPlayAgain, onNewCategory, loadi
           />
         </div>
       </div>
+
+      {/* Prize Wheel Modal */}
+      {showPrizeWheel && (
+        <PrizeWheel
+          onSpinComplete={onWheelSpinComplete}
+          playerName={players[currentPlayerIndex]?.name}
+        />
+      )}
 
       {isGameOver && (
         <GameResult

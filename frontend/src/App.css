@@ -33,7 +33,7 @@ body {
 }
 
 /* TV Display Optimization */
-@media (min-width: 1920px) {
+@media (min-width: 2560px) {
   .app-header h1 {
     font-size: 5rem;
   }

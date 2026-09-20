@@ -1,0 +1,81 @@
+/* MobileDrawer Styles */
+
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+}
+
+.mobile-drawer {
+  position: fixed;
+  background: white;
+  z-index: 1000;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.mobile-drawer-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 80vh;
+  border-radius: 20px 20px 0 0;
+}
+
+.mobile-drawer-left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 0 20px 20px 0;
+}
+
+.mobile-drawer-right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 20px 0 0 20px;
+}
+
+.drawer-handle {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  cursor: grab;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.drawer-handle:active {
+  cursor: grabbing;
+}
+
+.handle-bar {
+  width: 40px;
+  height: 4px;
+  background: #D1D5DB;
+  border-radius: 2px;
+}
+
+.drawer-content {
+  padding: 0 1.5rem 1.5rem;
+  overflow-y: auto;
+  max-height: calc(80vh - 3rem);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide on larger screens */
+@media (min-width: 768px) {
+  .mobile-drawer,
+  .drawer-backdrop {
+    display: none;
+  }
+}
+

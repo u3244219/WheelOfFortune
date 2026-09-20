@@ -31,7 +31,9 @@ class DatabaseService {
         console.log('Loading word database...');
 
         // Load and parse the SQL data file
-        const dataResponse = await fetch('/V2__Insert_sample_data_SQLite.sql');
+        // Use process.env.PUBLIC_URL for GitHub Pages compatibility
+        const basePath = process.env.PUBLIC_URL || '';
+        const dataResponse = await fetch(`${basePath}/V2__Insert_sample_data_SQLite.sql`);
         const dataSQL = await dataResponse.text();
 
         // Parse INSERT statements using regex

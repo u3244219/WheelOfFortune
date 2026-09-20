@@ -123,7 +123,7 @@
 }
 
 /* TV Display Optimization - Large Screens */
-@media (min-width: 1920px) {
+@media (min-width: 2560px) {
   .game-stats {
     margin: 4rem auto;
     padding: 0 3rem;

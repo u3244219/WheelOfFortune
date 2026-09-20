@@ -4,10 +4,16 @@
   "private": true,
   "homepage": "https://u3244219.github.io/WheelOfFortune",
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
     "axios": "^1.13.2",
+    "framer-motion": "^12.34.3",
+    "howler": "^2.2.4",
     "react": "^19.2.0",
+    "react-confetti": "^6.4.0",
     "react-dom": "^19.2.0",
-    "react-scripts": "5.0.1"
+    "react-responsive": "^10.0.1",
+    "react-scripts": "5.0.1",
+    "react-swipeable": "^7.0.2"
   },
   "scripts": {
     "start": "set DANGEROUSLY_DISABLE_HOST_CHECK=true && set PORT=3000 && react-scripts start",

@@ -1,20 +1,48 @@
 /**
  * GameResult Component
  * Displays win/loss screen with options to play again and final scores
+ * Now with confetti celebration!
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Confetti from 'react-confetti';
 import './GameResult.css';
 import { GAME_STATUS } from '../../constants/gameConstants';
 
 const GameResult = ({ status, maskedWord, onPlayAgain, onNewCategory, players }) => {
   const isWon = status === GAME_STATUS.WON;
   const isLost = status === GAME_STATUS.LOST;
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   if (!isWon && !isLost) return null;
 
   return (
     <div className={`game-result ${isWon ? 'won' : 'lost'}`}>
+      {/* Confetti for winners! */}
+      {isWon && (
+        <Confetti
+          width={windowSize.width}
+          height={windowSize.height}
+          recycle={false}
+          numberOfPieces={500}
+          gravity={0.3}
+        />
+      )}
       <div className="result-modal">
         <div className="result-icon">
           {isWon ? '🎉' : '😢'}
@@ -24,12 +52,6 @@ const GameResult = ({ status, maskedWord, onPlayAgain, onNewCategory, players })
           {isWon ? 'Congratulations!' : 'Game Over!'}
         </h2>
 
-        <p className="result-message">
-          {isWon
-            ? `You solved the puzzle!`
-            : `The word was:`
-          }
-        </p>
 
         <div className="result-word">
           {maskedWord}

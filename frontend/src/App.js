@@ -8,17 +8,31 @@ import './App.css';
 import PlayerSetup from './components/PlayerSetup/PlayerSetup';
 import CategorySelector from './components/CategorySelector/CategorySelector';
 import GameBoard from './components/GameBoard/GameBoard';
+import SoundToggle from './components/SoundToggle/SoundToggle';
 import useCategories from './hooks/useCategories';
 import useGame from './hooks/useGame';
 import { GAME_STATUS } from './constants/gameConstants';
 import ApiService from './services/api.service';
+import { preloadSounds } from './utils/soundManager';
 
 function App() {
   const [showPlayerSetup, setShowPlayerSetup] = useState(true);
   const [dbInitialized, setDbInitialized] = useState(false);
   const [dbError, setDbError] = useState(null);
   const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
-  const { gameState, loading: gameLoading, error: gameError, initializePlayers, startGame, guessLetter, resetGame, resetPlayers, letterPoints } = useGame();
+  const {
+    gameState,
+    loading: gameLoading,
+    error: gameError,
+    initializePlayers,
+    startGame,
+    guessLetter,
+    resetGame,
+    resetPlayers,
+    letterPoints,
+    showPrizeWheel,
+    handleWheelSpinComplete
+  } = useGame();
 
   // Initialize database on app load
   useEffect(() => {
@@ -28,6 +42,9 @@ function App() {
         await ApiService.initialize();
         setDbInitialized(true);
         console.log('Database ready!');
+
+        // 🔊 Preload sound effects
+        preloadSounds();
       } catch (error) {
         console.error('Failed to initialize database:', error);
         setDbError('Failed to load game database. Please refresh the page.');
@@ -93,6 +110,7 @@ function App() {
   if (showPlayerSetup) {
     return (
       <div className="app">
+        <SoundToggle />
         <div className="app-header">
           <h1>🎡 Wheel of Fortune</h1>
           <p className="app-subtitle">Test your word-guessing skills!</p>
@@ -107,6 +125,7 @@ function App() {
   if (gameState.status === GAME_STATUS.IDLE) {
     return (
       <div className="app">
+        <SoundToggle />
         <div className="app-header">
           <h1>🎡 Wheel of Fortune</h1>
           <p className="app-subtitle">Test your word-guessing skills!</p>
@@ -134,6 +153,7 @@ function App() {
   // Show game board when playing
   return (
     <div className="app">
+      <SoundToggle />
       <GameBoard
         gameState={gameState}
         onLetterClick={handleLetterClick}
@@ -141,6 +161,8 @@ function App() {
         onNewCategory={handleNewCategory}
         loading={gameLoading}
         letterPoints={letterPoints}
+        showPrizeWheel={showPrizeWheel}
+        onWheelSpinComplete={handleWheelSpinComplete}
       />
 
       {gameError && (
