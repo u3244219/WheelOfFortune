@@ -80,13 +80,20 @@
     overflow: hidden;
   }
 
-  .game-container {
+  /* Below about 1024px the scoreboard stacked under the board and pushed the
+     keyboard off screen. In landscape it always sits beside it. */
+  html .app .game-container {
     flex: 1 1 auto;
     min-height: 0;
     overflow: hidden;
+    flex-direction: row;
+    align-items: stretch;
+    gap: min(2vh, 1.2vw);
   }
 
   .main-content {
+    flex: 1 1 auto;
+    min-width: 0;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -180,6 +187,7 @@
     margin: 0;
   }
 
+  html .app .multiplayer-message,
   html .app .game-stats .game-message {
     flex: 0 1 auto;
     margin: 0;
@@ -189,41 +197,74 @@
     color: #e7ecff;
     border: none;
     box-shadow: none;
+    max-width: 60%;
+    align-self: center;
   }
 
   /* ---- The keyboard owns the bottom of the screen ----
-     26 letters in two rows of 13, filling the width, dividing whatever height
-     is left. Do not set `display` here: the keyboard is a grid whose column
-     count changes with width, and overriding it stacks every letter. */
+     Careful: the markup changes with width. Narrow screens render the 26 keys
+     as direct children; wider ones wrap them in .keyboard-row elements. A
+     wrapping flex row handles both - rows take a full line each, and loose
+     keys get a basis of one thirteenth so they wrap 13 to a line either way.
+     Setting `display: grid` or `flex-direction: column` breaks one of the two
+     layouts, which is how every letter ended up in a single column. */
   html .app .keyboard {
+    --kbgap: min(1.2vh, 0.7vw);
     flex: 1 1 auto;
     min-height: 0;
+    max-height: min(23vh, 13vw);
     width: 100%;
     max-width: min(1500px, 96%);
-    max-height: min(26vh, 15vw);
+    box-sizing: border-box;
     margin: 0 auto;
     padding: 0;
-    gap: min(1.2vh, 0.7vw);
-    grid-template-columns: repeat(13, 1fr);
-    grid-auto-rows: 1fr;
+    display: flex;
+    flex-wrap: wrap;
     align-content: stretch;
-    align-self: end;
+    align-self: stretch;
+    justify-content: center;
+    gap: var(--kbgap);
     background: transparent;
     box-shadow: none;
   }
 
-  /* Keep the white keycap look that reads well across a room - only the size
-     and the rhythm change here. */
+  html .app .keyboard .keyboard-row {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    gap: var(--kbgap);
+    min-height: 0;
+    margin: 0;
+  }
+
+  /* Keep the white keycap look, which reads well across a room, and the
+     colours that carry meaning: white is untried, grey was correct, red was
+     wrong. */
   html .app .keyboard .key {
-    width: 100%;
+    flex: 0 0 calc((100% - 12 * var(--kbgap)) / 13);
+    width: auto;
     height: 100%;
     min-width: 0;
     min-height: 0;
     padding: 0;
     font-size: min(3.6vh, 2vw);
     font-weight: 800;
-    border-radius: min(1.4vh, 0.8vw);
+    border-radius: min(1.2vh, 0.7vw);
     box-shadow: 0 min(0.5vh, 0.3vw) 0 rgba(0, 0, 0, 0.28);
+  }
+
+  html .app .keyboard .key.guessed {
+    background: #334155;
+    color: #e2e8f0;
+    border-color: #1e293b;
+    opacity: 1;
+  }
+
+  html .app .keyboard .key.incorrect {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #991b1b;
+    opacity: 1;
   }
 
   html .app .keyboard .key:active:not(:disabled) {
@@ -233,7 +274,13 @@
 
   /* ---- The scoreboard: glass, not a white box in a dark room ---- */
 
-  .side-panel { min-height: 0; overflow-y: auto; flex: 0 0 min(34vh, 19vw); }
+  html .app .side-panel {
+    flex: 0 0 min(36vh, 20vw);
+    position: static;
+    max-height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+  }
 
   html .app .scoreboard {
     background: rgba(255, 255, 255, 0.07);
@@ -254,6 +301,20 @@
   html .app .scoreboard .player-score-value { font-size: min(2.8vh, 1.5vw); }
   html .app .scoreboard .player-score { background: rgba(255, 255, 255, 0.06); }
   html .app .scoreboard .rank-item { font-size: min(2.2vh, 1.2vw); }
+
+  /* The rankings list repeats the players shown directly above it. */
+  html .app .scoreboard .leaderboard { display: none; }
+
+  html .app .scoreboard .player-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  html .app .scoreboard .turn-indicator {
+    font-size: min(1.8vh, 1vw);
+    letter-spacing: 0.06em;
+  }
 
   html .app .mobile-scoreboard-btn { display: none; }
 
