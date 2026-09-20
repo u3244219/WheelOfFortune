@@ -245,3 +245,174 @@
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+   The roster: pick tonight's players from cards.
+   Sized in vh so the same layout works on a phone and across a room.
+   --------------------------------------------------------------------------- */
+
+.player-setup.roster {
+  width: min(980px, 92vw);
+  max-width: none;
+}
+
+.player-setup.roster h2 {
+  margin-bottom: clamp(0.6rem, 1.8vh, 1.2rem);
+}
+
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(104px, 15vw, 170px), 1fr));
+  gap: clamp(0.5rem, 1.6vh, 1.1rem);
+  margin-bottom: clamp(0.6rem, 1.8vh, 1.2rem);
+}
+
+.roster-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.2rem, 0.8vh, 0.5rem);
+  padding: clamp(0.6rem, 1.8vh, 1.1rem) 0.5rem;
+  border: 3px solid transparent;
+  border-radius: 18px;
+  background: #f1f3f9;
+  color: #2c3e50;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.roster-card:hover {
+  transform: translateY(-2px);
+  background: #e9edf7;
+}
+
+.roster-card.selected {
+  border-color: var(--player-color, #6366f1);
+  background: color-mix(in srgb, var(--player-color, #6366f1) 14%, white);
+  box-shadow: 0 6px 18px -8px var(--player-color, #6366f1);
+}
+
+/* Arrow-key focus has to be obvious from across a room. */
+.roster-card.focused {
+  outline: 4px solid #4f46e5;
+  outline-offset: 3px;
+}
+
+.roster-avatar {
+  font-size: clamp(1.8rem, 6.5vh, 3.2rem);
+  line-height: 1;
+  width: clamp(2.6rem, 9vh, 4.4rem);
+  height: clamp(2.6rem, 9vh, 4.4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--player-color, #6366f1) 18%, white);
+}
+
+.roster-name {
+  font-size: clamp(0.8rem, 2.2vh, 1.15rem);
+  font-weight: 700;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roster-check {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.5rem;
+  width: clamp(1.1rem, 2.6vh, 1.6rem);
+  height: clamp(1.1rem, 2.6vh, 1.6rem);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.7rem, 1.8vh, 1rem);
+  font-weight: 800;
+  color: white;
+  background: transparent;
+}
+
+.roster-card.selected .roster-check {
+  background: var(--player-color, #6366f1);
+}
+
+.roster-remove {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.45rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  line-height: 1.1rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  color: #94a3b8;
+  background: transparent;
+}
+
+.roster-remove:hover {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.roster-card.add-card {
+  background: transparent;
+  border: 3px dashed #c7d0e3;
+  color: #64748b;
+}
+
+.roster-card.add-card:hover {
+  border-color: #6366f1;
+  color: #4f46e5;
+}
+
+.roster-card.add-card .roster-avatar {
+  background: transparent;
+  font-weight: 300;
+}
+
+.roster-card.adding {
+  gap: 0.4rem;
+  background: #eef2ff;
+  border-color: #6366f1;
+  cursor: default;
+}
+
+.roster-input {
+  width: 90%;
+  padding: 0.4rem 0.5rem;
+  border: 2px solid #c7d2fe;
+  border-radius: 10px;
+  font-size: clamp(0.8rem, 2vh, 1rem);
+  font-family: inherit;
+  text-align: center;
+}
+
+.roster-add-confirm {
+  padding: 0.35rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: white;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.roster-error {
+  margin: 0 0 0.6rem;
+  color: #dc2626;
+  font-size: clamp(0.75rem, 2vh, 0.95rem);
+  font-weight: 600;
+}
+
+.start-game-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
