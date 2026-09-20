@@ -21,6 +21,7 @@
   }
 
   .app {
+    height: 100vh; /* fallback for older television browsers */
     height: 100dvh;
     min-height: 0;
     display: flex;
