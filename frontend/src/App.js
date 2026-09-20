@@ -30,7 +30,6 @@ function App() {
     guessLetter,
     resetGame,
     resetPlayers,
-    letterPoints,
     showPrizeWheel,
     handleWheelSpinComplete
   } = useGame();
@@ -162,7 +161,6 @@ function App() {
         onPlayAgain={handlePlayAgain}
         onNewCategory={handleNewCategory}
         loading={gameLoading}
-        letterPoints={letterPoints}
         showPrizeWheel={showPrizeWheel}
         onWheelSpinComplete={handleWheelSpinComplete}
       />

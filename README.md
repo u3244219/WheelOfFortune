@@ -83,6 +83,16 @@ Each category is dealt from a shuffled deck rather than picked at random, and
 the position is kept in the browser, so every word in a category is played
 before any of them comes round again.
 
+## Scoring
+
+The wheel shows what a letter is worth on this spin, from 150 to 1000. A
+correct guess scores that value once for every time the letter appears in the
+puzzle, which is how the television show works and is easy for a child to
+follow out loud: 300 on the wheel, two Ts in the puzzle, 600 points.
+
+Scrabble letter values are no longer used for scoring, so the keyboard no
+longer shows a per letter score.
+
 ## The answer reveal
 
 When a round ends, the result screen shows the answer with a picture and a one
