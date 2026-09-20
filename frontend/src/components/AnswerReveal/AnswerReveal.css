@@ -19,8 +19,8 @@
 
 .answer-reveal-image {
   width: 100%;
-  max-width: 340px;
-  max-height: 260px;
+  max-width: 420px;
+  max-height: 320px;
   object-fit: cover;
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.2);
@@ -29,8 +29,8 @@
 
 .answer-reveal-skeleton {
   width: 100%;
-  max-width: 340px;
-  height: 180px;
+  max-width: 420px;
+  height: 220px;
   border-radius: 12px;
   background: linear-gradient(
     90deg,

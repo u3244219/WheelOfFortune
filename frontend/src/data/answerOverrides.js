@@ -26,6 +26,7 @@ export const ANSWER_OVERRIDES = {
   'ANIMAL:CARDINAL': { wiki: 'Northern cardinal' },
   'ANIMAL:CHICK': { wiki: 'Chicken' },
   'ANIMAL:GREAT WHITE': { wiki: 'Great white shark' },
+  'ANIMAL:HAMMERHEAD': { wiki: 'Hammerhead shark' },
   'ANIMAL:POISON DART': { wiki: 'Poison dart frog' },
   'ANIMAL:STICK BUG': { wiki: 'Phasmatodea' },
   'ANIMAL:MONITOR': { wiki: 'Monitor lizard' },
