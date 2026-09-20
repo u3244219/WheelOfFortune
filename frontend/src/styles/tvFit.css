@@ -1,15 +1,20 @@
 /*
- * One screen, no scrolling.
+ * Television layout.
  *
- * On a television you cannot scroll comfortably, but the layout was built for
- * a phone: at 16:9 the game board came to 861px of content in a 394px
- * viewport, so the puzzle and the keyboard could never be seen together, and
- * the setup screen pushed its button below the fold.
+ * Two rules govern everything here.
  *
- * These rules apply only to landscape screens - a television, a laptop, a
- * tablet turned sideways. Portrait phones keep the scrolling layout, which is
- * the right behaviour there. Everything is sized in vh so it scales from a
- * 720p set to a 4K one.
+ * One: the screen is never scrolled. The app fills exactly one viewport and
+ * each part takes a share of it, because a television cannot be scrolled
+ * comfortably.
+ *
+ * Two: every size is proportional - min(Xvh, Yvw) - never a pixel maximum.
+ * An earlier version used clamp() with pixel caps, which fitted a 720p screen
+ * and then stopped growing, so on a 1080p or 4K television the tiles and the
+ * keyboard sat tiny in the middle of a huge empty screen. Proportional units
+ * mean the layout looks identical at 1280x720, 1920x1080 and 3840x2160.
+ *
+ * Portrait phones are untouched: they keep the scrolling layout that suits
+ * them. These rules apply only to landscape screens 600px and wider.
  */
 
 @media (orientation: landscape) and (min-width: 600px) {
@@ -32,29 +37,40 @@
     padding: 2.5vh 2.5vw;
   }
 
-  /* The title banner took the top third of the screen. */
+  /* ---- Titles, kept small: the game is the point, not the banner ---- */
+
   .app-header {
     flex: 0 0 auto;
     padding: 0 0 1vh;
   }
 
   .app-header h1 {
-    font-size: clamp(1.2rem, 4.2vh, 2.6rem);
+    font-size: min(5vh, 2.8vw);
     margin: 0;
   }
 
   .app-subtitle {
-    font-size: clamp(0.7rem, 1.8vh, 1rem);
+    font-size: min(2.2vh, 1.2vw);
     margin: 0.3vh 0 0;
   }
 
   .new-players-btn {
-    padding: 0.7vh 1.5vw;
-    font-size: clamp(0.7rem, 1.9vh, 1rem);
+    padding: min(1vh, 0.6vw) min(3vh, 1.7vw);
+    font-size: min(2.2vh, 1.2vw);
     margin-top: 0.8vh;
   }
 
-  /* ---- The game board fills what is left, and never overflows ---- */
+  /* The app header already names the game; the board repeating it cost a
+     fifth of the screen. */
+  html .app .game-header h1 { display: none; }
+  html .app .game-header { flex: 0 0 auto; padding: 0.4vh 1vw; }
+
+  html .app .new-game-btn {
+    padding: min(1vh, 0.6vw) min(2.6vh, 1.5vw);
+    font-size: min(2.2vh, 1.2vw);
+  }
+
+  /* ---- The board ---- */
 
   .game-board {
     flex: 1 1 auto;
@@ -64,80 +80,76 @@
     overflow: hidden;
   }
 
-  .game-header {
-    flex: 0 0 auto;
-    padding-top: 0.4vh;
-    padding-bottom: 0.4vh;
-  }
-
-  /* The app header already says Wheel of Fortune - the board repeating it
-     cost 79px of a 394px screen. */
-  html .app .game-header h1 { display: none; }
-
-  html .app .game-header { padding: 0.3vh 1vw; }
-
-  html .app .new-game-btn {
-    padding: 0.6vh 1.4vw;
-    font-size: clamp(0.7rem, 1.9vh, 1rem);
-  }
-
   .game-container {
     flex: 1 1 auto;
     min-height: 0;
     overflow: hidden;
   }
 
-  .side-panel {
-    min-height: 0;
-    overflow-y: auto;
-  }
-
   .main-content {
     min-height: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 0.8vh;
+    justify-content: space-between;
+    gap: min(1.6vh, 0.9vw);
+    padding-bottom: min(2vh, 1.2vw);
     overflow: hidden;
   }
 
-  .word-display {
-    flex: 0 0 auto;
+  .word-display { flex: 0 0 auto; }
+
+  html .app .category-badge,
+  html .app .difficulty-badge {
+    font-size: min(2.4vh, 1.3vw);
+    padding: min(1vh, 0.6vw) min(2.4vh, 1.4vw);
   }
 
-  .word-boxes {
-    padding: 0.8vh 0;
-    gap: 0.8vh;
-  }
-
-  .app .letter-box {
-    width: clamp(26px, 6vh, 70px);
-    height: clamp(32px, 7.4vh, 84px);
-    font-size: clamp(0.9rem, 4vh, 2.6rem);
-    border-width: 2px;
-  }
-
+  /* The hint is support, not the headline: quiet glass rather than a white
+     slab across the screen. */
   html .app .hint {
-    font-size: clamp(0.72rem, 2vh, 1.2rem);
-    padding: 0.7vh 1.4vw;
-    margin: 0;
+    font-size: min(3.2vh, 1.8vw);
+    padding: min(1.6vh, 0.9vw) min(3vh, 1.7vw);
+    margin: 0 auto;
+    max-width: 70%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e7ecff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: none;
   }
 
-  .category-badge,
-  .difficulty-badge {
-    font-size: clamp(0.7rem, 1.9vh, 1.05rem);
-    padding: 0.5vh 1.2vw;
+  html .app .hint strong { color: #a5b4fc; }
+
+  /* The puzzle is the hero and should be the biggest thing on screen. */
+  html .app .word-boxes {
+    gap: min(1.4vh, 0.8vw);
+    padding: min(2vh, 1.2vw) 0;
   }
 
-  /* The stats block was 180px of a 394px screen - a heading, a count, a bar
-     and a message, each on its own line. One quiet row instead. */
+  html .app .letter-box {
+    width: min(11vh, 6vw);
+    height: min(14vh, 7.6vw);
+    font-size: min(8vh, 4.4vw);
+    border-width: 3px;
+    border-radius: min(1.6vh, 0.9vw);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(165, 180, 252, 0.35);
+    box-shadow: 0 min(1vh, 0.6vw) min(2vh, 1.2vw) rgba(0, 0, 0, 0.35);
+  }
+
+  html .app .letter-box.revealed {
+    background: linear-gradient(180deg, #fde68a, #f59e0b);
+    color: #3b1d00;
+    border-color: #fbbf24;
+  }
+
+  /* The stats block was four stacked lines. One quiet row instead. */
   html .app .game-stats {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.2vw;
-    padding: 0.4vh 1vw;
+    gap: 2vw;
+    padding: min(1vh, 0.6vw) 1vw;
     margin: 0;
   }
 
@@ -146,57 +158,104 @@
   html .app .game-stats .attempts-section {
     display: flex;
     align-items: center;
-    gap: 0.8vw;
+    gap: min(1.6vh, 0.9vw);
     margin: 0;
   }
 
   html .app .game-stats .attempts-section h3 {
-    font-size: clamp(0.6rem, 1.6vh, 0.9rem);
+    font-size: min(2.2vh, 1.2vw);
     margin: 0;
     white-space: nowrap;
+    color: rgba(231, 236, 255, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   html .app .game-stats .attempts-display { margin: 0; }
-  html .app .game-stats .attempts-count { font-size: clamp(0.7rem, 2vh, 1.05rem); }
-  html .app .game-stats .attempts-bar { width: 14vw; height: 1.1vh; margin: 0; }
+  html .app .game-stats .attempts-count { font-size: min(2.6vh, 1.4vw); }
+
+  html .app .game-stats .attempts-bar {
+    width: min(22vh, 12vw);
+    height: min(1.4vh, 0.8vw);
+    margin: 0;
+  }
 
   html .app .game-stats .game-message {
     flex: 0 1 auto;
     margin: 0;
-    padding: 0.3vh 1vw;
-    font-size: clamp(0.65rem, 1.8vh, 0.95rem);
+    padding: min(0.8vh, 0.5vw) min(2vh, 1.2vw);
+    font-size: min(2.4vh, 1.3vw);
+    background: rgba(255, 255, 255, 0.08);
+    color: #e7ecff;
+    border: none;
+    box-shadow: none;
   }
 
-  /* The keyboard takes whatever height is left and shrinks its keys to fit,
-     so it is always on screen with the puzzle. Do not set `display` here -
-     the keyboard is a grid whose column count changes with width, and
-     overriding it stacks every letter into one column. */
+  /* ---- The keyboard owns the bottom of the screen ----
+     26 letters in two rows of 13, filling the width, dividing whatever height
+     is left. Do not set `display` here: the keyboard is a grid whose column
+     count changes with width, and overriding it stacks every letter. */
   html .app .keyboard {
     flex: 1 1 auto;
     min-height: 0;
-    align-content: center;
-    margin: 0.4vh auto 0;
+    width: 100%;
+    max-width: min(1500px, 96%);
+    max-height: min(26vh, 15vw);
+    margin: 0 auto;
     padding: 0;
-    gap: 0.6vh 0.5vw;
+    gap: min(1.2vh, 0.7vw);
+    grid-template-columns: repeat(13, 1fr);
+    grid-auto-rows: 1fr;
+    align-content: stretch;
+    align-self: end;
+    background: transparent;
+    box-shadow: none;
   }
 
+  /* Keep the white keycap look that reads well across a room - only the size
+     and the rhythm change here. */
   html .app .keyboard .key {
     width: 100%;
+    height: 100%;
     min-width: 0;
-    height: clamp(20px, 4.6vh, 54px);
-    font-size: clamp(0.6rem, 2.2vh, 1.35rem);
+    min-height: 0;
     padding: 0;
-    border-width: 2px;
+    font-size: min(3.6vh, 2vw);
+    font-weight: 800;
+    border-radius: min(1.4vh, 0.8vw);
+    box-shadow: 0 min(0.5vh, 0.3vw) 0 rgba(0, 0, 0, 0.28);
   }
 
-  /* The floating scores button sat on top of the last two keys. */
-  html .app .mobile-scoreboard-btn {
-    padding: 0.6vh 1.2vw;
-    font-size: clamp(0.65rem, 1.8vh, 0.95rem);
-    bottom: auto;
-    top: 0.5vh;
-    right: 0.5vw;
+  html .app .keyboard .key:active:not(:disabled) {
+    transform: translateY(min(0.4vh, 0.24vw));
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.28);
   }
+
+  /* ---- The scoreboard: glass, not a white box in a dark room ---- */
+
+  .side-panel { min-height: 0; overflow-y: auto; flex: 0 0 min(34vh, 19vw); }
+
+  html .app .scoreboard {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    box-shadow: none;
+    padding: min(2vh, 1.2vw);
+    color: #e7ecff;
+  }
+
+  html .app .scoreboard h3,
+  html .app .scoreboard h4,
+  html .app .scoreboard .player-name,
+  html .app .scoreboard .rank-name { color: #e7ecff; }
+
+  html .app .scoreboard h3 { font-size: min(2.8vh, 1.5vw); }
+  html .app .scoreboard h4 { font-size: min(2.2vh, 1.2vw); }
+  html .app .scoreboard .player-name { font-size: min(2.4vh, 1.3vw); }
+  html .app .scoreboard .player-score-value { font-size: min(2.8vh, 1.5vw); }
+  html .app .scoreboard .player-score { background: rgba(255, 255, 255, 0.06); }
+  html .app .scoreboard .rank-item { font-size: min(2.2vh, 1.2vw); }
+
+  html .app .mobile-scoreboard-btn { display: none; }
 
   /* ---- Choosing a category: every tile on one screen ---- */
 
@@ -210,57 +269,64 @@
   }
 
   .category-selector h2 {
-    font-size: clamp(0.9rem, 2.8vh, 1.6rem);
-    margin-bottom: 1vh;
+    font-size: min(3.4vh, 1.9vw);
+    margin-bottom: 1.5vh;
   }
 
   .category-selector .category-grid {
-    grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 15vw, 210px), 1fr));
-    gap: 1.2vh 1vw;
+    grid-template-columns: repeat(5, 1fr);
+    gap: min(2vh, 1.2vw);
     overflow: hidden;
   }
 
   .category-selector .category-button {
-    padding: 1.4vh 0.8vw;
-    font-size: clamp(0.72rem, 2.2vh, 1.15rem);
+    padding: min(2.4vh, 1.4vw) min(1vh, 0.6vw);
+    font-size: min(2.6vh, 1.4vw);
   }
 
-  /* ---- Setting up players ---- */
+  /* ---- Picking players ---- */
 
   .player-setup {
     flex: 0 0 auto;
+    margin-top: auto;
+    margin-bottom: auto;
     max-height: 100%;
     overflow-y: auto;
-    padding: 1.6vh 2vw;
+    padding: min(3vh, 1.7vw) min(3vh, 1.7vw);
   }
 
   .player-setup h2 {
-    font-size: clamp(1rem, 3vh, 1.8rem);
-    margin-bottom: 1vh;
+    font-size: min(3.6vh, 2vw);
+    margin-bottom: min(2vh, 1.2vw);
   }
 
-  .setup-section {
-    margin-bottom: 1.2vh;
+  .player-setup .roster-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(22vh, 12vw), 1fr));
+    gap: min(2vh, 1.2vw);
   }
 
-  .player-setup .player-count-select,
-  .player-setup .player-name-input {
-    padding: 0.6vh 1vw;
-    font-size: clamp(0.8rem, 2.2vh, 1.05rem);
+  .player-setup .roster-card {
+    padding: min(2.4vh, 1.4vw) 0.5vw;
+    border-radius: min(2.4vh, 1.4vw);
+  }
+
+  .player-setup .roster-avatar {
+    width: min(11vh, 6vw);
+    height: min(11vh, 6vw);
+    font-size: min(7vh, 3.8vw);
+  }
+
+  .player-setup .roster-name { font-size: min(2.6vh, 1.4vw); }
+
+  .player-setup .roster-check {
+    width: min(3.4vh, 1.9vw);
+    height: min(3.4vh, 1.9vw);
+    font-size: min(2.2vh, 1.2vw);
   }
 
   .player-setup .start-game-button {
-    padding: 1vh 2vw;
-    font-size: clamp(0.85rem, 2.4vh, 1.15rem);
-    margin-top: 0.6vh;
-  }
-
-  .player-setup .players-list h3 {
-    font-size: clamp(0.8rem, 2.2vh, 1.1rem);
-    margin-bottom: 0.6vh;
-  }
-
-  .player-setup .setup-section label {
-    font-size: clamp(0.75rem, 2vh, 1rem);
+    padding: min(2vh, 1.2vw) min(4vh, 2.2vw);
+    font-size: min(2.8vh, 1.5vw);
+    margin-top: min(1.4vh, 0.8vw);
   }
 }
