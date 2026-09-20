@@ -6,10 +6,11 @@
 
 import React, { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
+import AnswerReveal from '../AnswerReveal/AnswerReveal';
 import './GameResult.css';
 import { GAME_STATUS } from '../../constants/gameConstants';
 
-const GameResult = ({ status, maskedWord, onPlayAgain, onNewCategory, players }) => {
+const GameResult = ({ status, maskedWord, answer, category, hint, onPlayAgain, onNewCategory, players }) => {
   const isWon = status === GAME_STATUS.WON;
   const isLost = status === GAME_STATUS.LOST;
   const [windowSize, setWindowSize] = useState({
@@ -53,9 +54,11 @@ const GameResult = ({ status, maskedWord, onPlayAgain, onNewCategory, players })
         </h2>
 
 
-        <div className="result-word">
-          {maskedWord}
-        </div>
+        <AnswerReveal
+          word={answer || maskedWord}
+          category={category}
+          hint={hint}
+        />
 
         {players.length > 0 && (
           <div className="final-scores">

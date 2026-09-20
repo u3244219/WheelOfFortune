@@ -18,6 +18,7 @@ import { GAME_STATUS, GAME_CONSTANTS } from '../../constants/gameConstants';
 
 const GameBoard = ({
   gameState,
+  answer,
   onLetterClick,
   onPlayAgain,
   onNewCategory,
@@ -133,6 +134,9 @@ const GameBoard = ({
         <GameResult
           status={status}
           maskedWord={maskedWord}
+          answer={answer}
+          category={category}
+          hint={hint}
           onPlayAgain={onPlayAgain}
           onNewCategory={onNewCategory}
           players={players}

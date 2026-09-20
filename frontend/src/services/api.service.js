@@ -51,6 +51,12 @@ const ApiService = {
   },
 
   /**
+   * The full answer for the round in play
+   * @returns {string}
+   */
+  revealAnswer: () => gameService.getAnswer(),
+
+  /**
    * Get Scrabble letter point values
    * @returns {Promise<Object>} Map of letters to point values
    */
