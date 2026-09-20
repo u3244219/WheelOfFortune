@@ -1,7 +1,7 @@
-package com.adeel.wheeloffotune.dto;
+package com.adeel.wheeloffortune.dto;
 
-import com.adeel.wheeloffotune.model.Category;
-import com.adeel.wheeloffotune.model.Difficulty;
+import com.adeel.wheeloffortune.model.Category;
+import com.adeel.wheeloffortune.model.Difficulty;
 
 /**
  * Response containing a word puzzle with masked representation

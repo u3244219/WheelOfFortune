@@ -80,7 +80,7 @@ FLUSH PRIVILEGES;
 
 ### Start Application
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 .\mvnw.cmd spring-boot:run
 ```
 
@@ -134,10 +134,10 @@ curl -X POST http://localhost:8080/api/words/guess ^
 ## 📁 File Structure
 
 ```
-WheelOfFotune/
+WheelOfFortune/
 ├── pom.xml (✏️ Updated with MySQL dependencies)
 ├── src/main/
-│   ├── java/com/adeel/wheeloffotune/
+│   ├── java/com/adeel/wheeloffortune/
 │   │   ├── model/
 │   │   │   └── WordEntity.java (✏️ Added JPA annotations)
 │   │   ├── repository/

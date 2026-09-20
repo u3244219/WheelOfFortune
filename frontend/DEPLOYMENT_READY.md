@@ -26,12 +26,12 @@ Added these configurations:
 ### Step 1: Update Your Username
 Open `frontend/package.json` and replace `YOUR_GITHUB_USERNAME`:
 ```json
-"homepage": "https://YOUR_GITHUB_USERNAME.github.io/WheelOfFotune"
+"homepage": "https://YOUR_GITHUB_USERNAME.github.io/WheelOfFortune"
 ```
 
 ### Step 2: Create GitHub Repository
 1. Go to https://github.com/new
-2. Name: **WheelOfFotune**
+2. Name: **WheelOfFortune**
 3. Make it **Public**
 4. Click "Create repository"
 
@@ -39,17 +39,17 @@ Open `frontend/package.json` and replace `YOUR_GITHUB_USERNAME`:
 
 **Option A - Automated Script (Easiest):**
 ```powershell
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune\frontend
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune\frontend
 .\deploy-to-github.ps1
 ```
 
 **Option B - Manual Commands:**
 ```bash
-# From the WheelOfFotune root directory
+# From the WheelOfFortune root directory
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USERNAME/WheelOfFotune.git
+git remote add origin https://github.com/YOUR_USERNAME/WheelOfFortune.git
 git branch -M main
 git push -u origin main
 
@@ -61,7 +61,7 @@ npm run deploy
 ## 🌐 Your App URL
 After deployment (1-2 minutes), your game will be live at:
 ```
-https://YOUR_USERNAME.github.io/WheelOfFotune
+https://YOUR_USERNAME.github.io/WheelOfFortune
 ```
 
 ## 📱 Perfect for TV!

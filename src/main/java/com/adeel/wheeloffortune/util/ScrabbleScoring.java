@@ -1,4 +1,4 @@
-package com.adeel.wheeloffotune.util;
+package com.adeel.wheeloffortune.util;
 
 import java.util.HashMap;
 import java.util.Map;

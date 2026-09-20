@@ -1,10 +1,10 @@
-package com.adeel.wheeloffotune;
+package com.adeel.wheeloffortune;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WheelOfFotuneApplicationTests {
+class WheelOfFortuneApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,13 +1,13 @@
-package com.adeel.wheeloffotune;
+package com.adeel.wheeloffortune;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WheelOfFotuneApplication {
+public class WheelOfFortuneApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WheelOfFotuneApplication.class, args);
+        SpringApplication.run(WheelOfFortuneApplication.class, args);
     }
 
 }

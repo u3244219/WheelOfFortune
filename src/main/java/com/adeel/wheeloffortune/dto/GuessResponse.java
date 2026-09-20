@@ -1,4 +1,4 @@
-package com.adeel.wheeloffotune.dto;
+package com.adeel.wheeloffortune.dto;
 
 /**
  * Response after processing a letter guess

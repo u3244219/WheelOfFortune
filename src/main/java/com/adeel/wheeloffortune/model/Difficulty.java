@@ -1,4 +1,4 @@
-package com.adeel.wheeloffotune.model;
+package com.adeel.wheeloffortune.model;
 
 public enum Difficulty {
     EASY,

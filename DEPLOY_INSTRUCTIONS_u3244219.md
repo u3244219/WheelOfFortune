@@ -4,7 +4,7 @@
 
 Your GitHub username (u3244219) and email have been configured.
 
-Your game will be live at: **https://u3244219.github.io/WheelOfFotune**
+Your game will be live at: **https://u3244219.github.io/WheelOfFortune**
 
 ---
 
@@ -13,7 +13,7 @@ Your game will be live at: **https://u3244219.github.io/WheelOfFotune**
 ### STEP 1: Create GitHub Repository
 
 1. Go to: **https://github.com/new**
-2. Repository name: **WheelOfFotune** (exactly as shown)
+2. Repository name: **WheelOfFortune** (exactly as shown)
 3. Description: "Multiplayer Wheel of Fortune game with 13 categories"
 4. Select: **Public** ✓
 5. **Do NOT** check any boxes (no README, no .gitignore, no license)
@@ -30,7 +30,7 @@ Your game will be live at: **https://u3244219.github.io/WheelOfFotune**
 Open PowerShell in your project folder and run:
 
 ```powershell
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 .\deploy-windows.ps1
 ```
 
@@ -47,7 +47,7 @@ If the script doesn't work, run these commands one by one:
 
 ```bash
 # Navigate to project folder
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 
 # Initialize Git
 git init
@@ -59,7 +59,7 @@ git add .
 git commit -m "Initial commit: Wheel of Fortune game"
 
 # Connect to GitHub
-git remote add origin https://github.com/u3244219/WheelOfFotune.git
+git remote add origin https://github.com/u3244219/WheelOfFortune.git
 git branch -M main
 git push -u origin main
 
@@ -73,7 +73,7 @@ npm run deploy
 ### STEP 3: Wait & Access
 
 1. **Wait 1-2 minutes** for GitHub Pages to process
-2. **Visit your game**: https://u3244219.github.io/WheelOfFotune
+2. **Visit your game**: https://u3244219.github.io/WheelOfFortune
 3. **Bookmark it** for easy access on your TV!
 
 ---
@@ -95,7 +95,7 @@ Your game includes:
 Once deployed:
 
 1. Open your Smart TV browser
-2. Go to: https://u3244219.github.io/WheelOfFotune
+2. Go to: https://u3244219.github.io/WheelOfFortune
 3. Bookmark it
 4. Play anytime!
 
@@ -106,7 +106,7 @@ Once deployed:
 When you make changes to the game:
 
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 
 # Commit changes
 git add .
@@ -135,11 +135,11 @@ If you already created it, that's fine! Just run the deployment script.
 
 ### Deployment failed?
 - Make sure you created the repository as **Public**
-- Verify repository name is exactly: **WheelOfFotune**
+- Verify repository name is exactly: **WheelOfFortune**
 - Check you have internet connection
 
 ### Need to delete and start over?
-1. Go to: https://github.com/u3244219/WheelOfFotune/settings
+1. Go to: https://github.com/u3244219/WheelOfFortune/settings
 2. Scroll to bottom
 3. Click "Delete this repository"
 4. Start from Step 1 again
@@ -163,7 +163,7 @@ Before deploying:
 Just follow these 3 steps:
 1. Create GitHub repository ➜ https://github.com/new
 2. Run deployment script ➜ `.\deploy-windows.ps1`
-3. Wait & visit ➜ https://u3244219.github.io/WheelOfFotune
+3. Wait & visit ➜ https://u3244219.github.io/WheelOfFortune
 
 **Your game will be live on the internet!** 🎡🎮
 
@@ -172,8 +172,8 @@ Just follow these 3 steps:
 **Your Details:**
 - GitHub Username: u3244219
 - GitHub Email: u3244219@uel.ac.uk
-- Repository: WheelOfFotune
-- Live URL: https://u3244219.github.io/WheelOfFotune
+- Repository: WheelOfFortune
+- Live URL: https://u3244219.github.io/WheelOfFortune
 
 **Time Required:** 5-10 minutes
 **Cost:** Free (forever)

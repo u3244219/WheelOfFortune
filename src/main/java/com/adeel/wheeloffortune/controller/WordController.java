@@ -1,11 +1,11 @@
-package com.adeel.wheeloffotune.controller;
+package com.adeel.wheeloffortune.controller;
 
-import com.adeel.wheeloffotune.dto.GuessRequest;
-import com.adeel.wheeloffotune.dto.GuessResponse;
-import com.adeel.wheeloffotune.dto.WordResponse;
-import com.adeel.wheeloffotune.model.Category;
-import com.adeel.wheeloffotune.service.WordService;
-import com.adeel.wheeloffotune.util.ScrabbleScoring;
+import com.adeel.wheeloffortune.dto.GuessRequest;
+import com.adeel.wheeloffortune.dto.GuessResponse;
+import com.adeel.wheeloffortune.dto.WordResponse;
+import com.adeel.wheeloffortune.model.Category;
+import com.adeel.wheeloffortune.service.WordService;
+import com.adeel.wheeloffortune.util.ScrabbleScoring;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

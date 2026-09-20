@@ -65,7 +65,7 @@ mysql>
 ## Then Run the Application Again
 
 ```cmd
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 .\mvnw.cmd spring-boot:run
 ```
 
@@ -83,7 +83,7 @@ Successfully applied 2 migrations
 Then:
 ```
 Tomcat started on port 8080
-Started WheelOfFotuneApplication
+Started WheelOfFortuneApplication
 ```
 
 ---

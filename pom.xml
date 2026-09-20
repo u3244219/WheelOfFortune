@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.adeel</groupId>
-    <artifactId>WheelOfFotune</artifactId>
+    <artifactId>WheelOfFortune</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>WheelOfFotune</name>
-    <description>WheelOfFotune</description>
+    <name>WheelOfFortune</name>
+    <description>WheelOfFortune</description>
     <url/>
     <licenses>
         <license/>

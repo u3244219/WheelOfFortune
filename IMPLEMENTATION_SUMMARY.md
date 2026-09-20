@@ -295,15 +295,15 @@ Eventually get:
 ## 📖 Files Created/Modified
 
 ### Created:
-- `src/main/java/com/adeel/wheeloffotune/model/Category.java`
-- `src/main/java/com/adeel/wheeloffotune/model/Difficulty.java`
-- `src/main/java/com/adeel/wheeloffotune/model/WordEntity.java`
-- `src/main/java/com/adeel/wheeloffotune/dto/WordResponse.java`
-- `src/main/java/com/adeel/wheeloffotune/dto/GuessRequest.java`
-- `src/main/java/com/adeel/wheeloffotune/dto/GuessResponse.java`
-- `src/main/java/com/adeel/wheeloffotune/repository/WordRepository.java`
-- `src/main/java/com/adeel/wheeloffotune/service/WordService.java`
-- `src/main/java/com/adeel/wheeloffotune/controller/WordController.java`
+- `src/main/java/com/adeel/wheeloffortune/model/Category.java`
+- `src/main/java/com/adeel/wheeloffortune/model/Difficulty.java`
+- `src/main/java/com/adeel/wheeloffortune/model/WordEntity.java`
+- `src/main/java/com/adeel/wheeloffortune/dto/WordResponse.java`
+- `src/main/java/com/adeel/wheeloffortune/dto/GuessRequest.java`
+- `src/main/java/com/adeel/wheeloffortune/dto/GuessResponse.java`
+- `src/main/java/com/adeel/wheeloffortune/repository/WordRepository.java`
+- `src/main/java/com/adeel/wheeloffortune/service/WordService.java`
+- `src/main/java/com/adeel/wheeloffortune/controller/WordController.java`
 - `API_DOCUMENTATION.md`
 
 ### Modified:

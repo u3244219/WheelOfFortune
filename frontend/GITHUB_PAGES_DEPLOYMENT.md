@@ -22,18 +22,18 @@ Your Wheel of Fortune game is now ready to deploy to GitHub Pages!
 Open `package.json` and replace `YOUR_GITHUB_USERNAME` with your actual GitHub username:
 
 ```json
-"homepage": "https://YOUR_GITHUB_USERNAME.github.io/WheelOfFotune"
+"homepage": "https://YOUR_GITHUB_USERNAME.github.io/WheelOfFortune"
 ```
 
 **Example:**
 ```json
-"homepage": "https://adeel.github.io/WheelOfFotune"
+"homepage": "https://adeel.github.io/WheelOfFortune"
 ```
 
 ### Step 2: Initialize Git Repository (if not already done)
 
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 git init
 git add .
 git commit -m "Initial commit: Wheel of Fortune game with 13 categories"
@@ -42,7 +42,7 @@ git commit -m "Initial commit: Wheel of Fortune game with 13 categories"
 ### Step 3: Create GitHub Repository
 
 1. Go to https://github.com/new
-2. Repository name: **WheelOfFotune** (or any name you prefer)
+2. Repository name: **WheelOfFortune** (or any name you prefer)
 3. Make it **Public** (required for free GitHub Pages)
 4. **Do NOT** initialize with README, .gitignore, or license
 5. Click "Create repository"
@@ -52,7 +52,7 @@ git commit -m "Initial commit: Wheel of Fortune game with 13 categories"
 Replace `YOUR_GITHUB_USERNAME` with your GitHub username:
 
 ```bash
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/WheelOfFotune.git
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/WheelOfFortune.git
 git branch -M main
 git push -u origin main
 ```
@@ -84,7 +84,7 @@ This command will:
 
 Your app will be available at:
 ```
-https://YOUR_GITHUB_USERNAME.github.io/WheelOfFotune
+https://YOUR_GITHUB_USERNAME.github.io/WheelOfFortune
 ```
 
 ## 📱 For TV Access
@@ -116,7 +116,7 @@ The live site updates in 1-2 minutes!
 Your repository will look like this:
 
 ```
-WheelOfFotune/
+WheelOfFortune/
 ├── frontend/                    (Your React app)
 │   ├── public/
 │   │   ├── favicon.ico
@@ -245,7 +245,7 @@ Create a README for your repository:
 A multiplayer word-guessing game with 13 categories and 2,600+ puzzles!
 
 ## Play Now
-[https://YOUR_USERNAME.github.io/WheelOfFotune](https://YOUR_USERNAME.github.io/WheelOfFotune)
+[https://YOUR_USERNAME.github.io/WheelOfFortune](https://YOUR_USERNAME.github.io/WheelOfFortune)
 
 ## Features
 - 13 diverse categories

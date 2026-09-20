@@ -35,14 +35,14 @@ REACT_APP_API_BASE_URL=http://192.168.1.100:8080
 
 ### Backend (Terminal 1):
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 mvn spring-boot:run
 ```
 ✅ Backend accessible at: `http://YOUR_IP_ADDRESS:8080`
 
 ### Frontend (Terminal 2):
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune\frontend
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune\frontend
 npm start
 ```
 ✅ Frontend accessible at: `http://YOUR_IP_ADDRESS:3000`

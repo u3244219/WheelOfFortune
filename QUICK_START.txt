@@ -4,7 +4,7 @@
 ╚══════════════════════════════════════════════════════════════╝
 
 📍 YOUR GAME URL (after deployment):
-   https://u3244219.github.io/WheelOfFotune
+   https://u3244219.github.io/WheelOfFortune
 
 
 📋 2 SIMPLE STEPS:
@@ -16,7 +16,7 @@
 1. Open browser: https://github.com/new
 
 2. Fill in:
-   Repository name: WheelOfFotune
+   Repository name: WheelOfFortune
    Public: ✓ (selected)
 
 3. Click: "Create repository"
@@ -31,7 +31,7 @@
 
 Open PowerShell and run:
 
-   cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+   cd C:\Users\adeel\Documents\Practice\WheelOfFortune
    .\deploy-windows.ps1
 
 The script will handle everything automatically!
@@ -42,7 +42,7 @@ The script will handle everything automatically!
 └──────────────────────────────────────────────────────────────┘
 
 1. Wait 1-2 minutes
-2. Visit: https://u3244219.github.io/WheelOfFotune
+2. Visit: https://u3244219.github.io/WheelOfFortune
 3. Enjoy! 🎮
 
 
@@ -62,7 +62,7 @@ The script will handle everything automatically!
 
 Once live, just:
 1. Open TV browser
-2. Go to: https://u3244219.github.io/WheelOfFotune
+2. Go to: https://u3244219.github.io/WheelOfFortune
 3. Bookmark it
 4. Play anytime!
 
@@ -70,7 +70,7 @@ Once live, just:
 
 🔄 TO UPDATE LATER:
 
-   cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+   cd C:\Users\adeel\Documents\Practice\WheelOfFortune
    git add .
    git commit -m "My changes"
    git push origin main
@@ -83,8 +83,8 @@ Once live, just:
 
 Username: u3244219
 Email: u3244219@uel.ac.uk
-Repo: WheelOfFotune
-URL: https://u3244219.github.io/WheelOfFotune
+Repo: WheelOfFortune
+URL: https://u3244219.github.io/WheelOfFortune
 
 ═══════════════════════════════════════════════════════════════
 

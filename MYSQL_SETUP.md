@@ -73,7 +73,7 @@ The application will automatically:
 - Populate with sample data
 
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 .\mvnw.cmd spring-boot:run
 ```
 

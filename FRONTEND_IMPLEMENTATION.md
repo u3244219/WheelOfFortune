@@ -80,13 +80,13 @@ The Wheel of Fortune frontend has been fully implemented with a complete React.j
 
 ### Start Backend (if not running)
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune
 mvn spring-boot:run
 ```
 
 ### Start Frontend
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune\frontend
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune\frontend
 npm start
 ```
 

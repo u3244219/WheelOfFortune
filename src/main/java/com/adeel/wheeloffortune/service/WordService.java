@@ -1,12 +1,12 @@
-package com.adeel.wheeloffotune.service;
+package com.adeel.wheeloffortune.service;
 
-import com.adeel.wheeloffotune.dto.GuessRequest;
-import com.adeel.wheeloffotune.dto.GuessResponse;
-import com.adeel.wheeloffotune.dto.WordResponse;
-import com.adeel.wheeloffotune.model.Category;
-import com.adeel.wheeloffotune.model.WordEntity;
-import com.adeel.wheeloffotune.repository.WordRepository;
-import com.adeel.wheeloffotune.util.ScrabbleScoring;
+import com.adeel.wheeloffortune.dto.GuessRequest;
+import com.adeel.wheeloffortune.dto.GuessResponse;
+import com.adeel.wheeloffortune.dto.WordResponse;
+import com.adeel.wheeloffortune.model.Category;
+import com.adeel.wheeloffortune.model.WordEntity;
+import com.adeel.wheeloffortune.repository.WordRepository;
+import com.adeel.wheeloffortune.util.ScrabbleScoring;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

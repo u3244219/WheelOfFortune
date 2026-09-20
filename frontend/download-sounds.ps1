@@ -1,7 +1,7 @@
 # Download Royalty-Free Sound Effects
 # This script downloads CC0/Public Domain sounds from freesound.org and other sources
 
-$soundsDir = "C:\Users\adeel\Documents\Practice\WheelOfFotune\frontend\public\sounds"
+$soundsDir = "C:\Users\adeel\Documents\Practice\WheelOfFortune\frontend\public\sounds"
 
 Write-Host "Downloading royalty-free sound effects..." -ForegroundColor Green
 Write-Host "Sounds will be saved to: $soundsDir" -ForegroundColor Cyan

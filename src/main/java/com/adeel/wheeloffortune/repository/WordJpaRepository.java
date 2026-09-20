@@ -1,7 +1,7 @@
-package com.adeel.wheeloffotune.repository;
+package com.adeel.wheeloffortune.repository;
 
-import com.adeel.wheeloffotune.model.Category;
-import com.adeel.wheeloffotune.model.WordEntity;
+import com.adeel.wheeloffortune.model.Category;
+import com.adeel.wheeloffortune.model.WordEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

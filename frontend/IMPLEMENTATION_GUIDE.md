@@ -6,7 +6,7 @@
 Run these commands in your terminal:
 
 ```bash
-cd C:\Users\adeel\Documents\Practice\WheelOfFotune\frontend
+cd C:\Users\adeel\Documents\Practice\WheelOfFortune\frontend
 
 # Phase 1 - Essential (Install Now)
 npm install react-responsive
