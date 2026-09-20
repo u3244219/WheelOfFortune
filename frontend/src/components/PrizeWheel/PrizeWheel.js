@@ -17,32 +17,30 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
   const [showResult, setShowResult] = useState(false);
   const wheelRef = useRef(null);
 
-  // Prize segments - 12 segments
+  // Wheel values, as on the show: what each letter is worth this spin.
+  // Arranged so that high and low values sit next to each other.
   const prizes = useMemo(() => [
-    { value: 1, color: '#FF6B6B', label: '1x' },
-    { value: 2, color: '#4ECDC4', label: '2x' },
-    { value: 3, color: '#45B7D1', label: '3x' },
-    { value: 5, color: '#FFA07A', label: '5x' },
-    { value: 1, color: '#98D8C8', label: '1x' },
-    { value: 10, color: '#F7DC6F', label: '10x' },
-    { value: 2, color: '#BB8FCE', label: '2x' },
-    { value: 20, color: '#52D726', label: '20x' },
-    { value: 1, color: '#85C1E2', label: '1x' },
-    { value: 3, color: '#F8B739', label: '3x' },
-    { value: 50, color: '#FFD700', label: '50x' },
-    { value: 1, color: '#FF8C94', label: '1x' }
-  ], []);
+    { value: 300, color: '#FF6B6B', dark: false },
+    { value: 600, color: '#4ECDC4', dark: true },
+    { value: 200, color: '#45B7D1', dark: false },
+    { value: 900, color: '#FFA07A', dark: true },
+    { value: 400, color: '#98D8C8', dark: true },
+    { value: 150, color: '#F7DC6F', dark: true },
+    { value: 700, color: '#BB8FCE', dark: false },
+    { value: 250, color: '#52D726', dark: true },
+    { value: 500, color: '#85C1E2', dark: true },
+    { value: 1000, color: '#F8B739', dark: true },
+    { value: 350, color: '#FFD700', dark: true },
+    { value: 800, color: '#FF8C94', dark: false }
+  ].map(p => ({ ...p, label: String(p.value) })), []);
 
   const segmentAngle = 360 / prizes.length; // 30 degrees per segment
 
   const handleSpin = () => {
-    console.log('handleSpin called, isSpinning:', isSpinning);
     if (isSpinning) {
-      console.log('Already spinning, returning...');
       return;
     }
 
-    console.log('Starting spin...');
     setIsSpinning(true);
 
     // 🔊 Play wheel spinning sounds
@@ -56,7 +54,6 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
     const segmentCenter = randomSegment * segmentAngle + (segmentAngle / 2);
     const finalRotation = fullRotations * 360 + segmentCenter;
 
-    console.log('Final rotation:', finalRotation);
     setRotation(finalRotation);
 
     // Calculate winning prize - pointer at top (0 degrees)
@@ -65,7 +62,6 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
     const winningIndex = Math.floor(((360 - normalizedRotation) / segmentAngle)) % prizes.length;
     const wonPrize = prizes[winningIndex];
 
-    console.log('Won prize:', wonPrize);
 
     // 🔊 Realistic variable tempo wheel ticking (like a real game show wheel!)
     const spinDuration = 4000; // 4 seconds total
@@ -96,7 +92,6 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
         SoundEffects.wheelTick();
         lastTickTime = Date.now();
         tickCount++;
-        console.log(`Tick ${tickCount}: interval=${Math.round(currentInterval)}ms, progress=${Math.round(progress * 100)}%`);
       }
 
       // Schedule next frame
@@ -115,8 +110,6 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
       // 🔊 Play win sound based on multiplier
       SoundEffects.bigWin(wonPrize.value);
 
-      console.log(`Spin complete! Total ticks: ${tickCount}`);
-
       // Auto-close after 2 seconds
       setTimeout(() => {
         setShowResult(false);
@@ -129,14 +122,11 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
 
   // Auto-spin on component mount
   useEffect(() => {
-    console.log('PrizeWheel mounted - triggering auto-spin in 500ms');
     // Small delay to allow dialog animation to complete first
     const timer = setTimeout(() => {
-      console.log('Auto-spin timeout fired');
       handleSpin();
     }, 500);
     return () => {
-      console.log('PrizeWheel unmounting - clearing timer');
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -205,7 +195,7 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
                       y={textY}
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      fill={prize.value === 10 || prize.value === 50 ? '#000' : '#fff'}
+                      fill={prize.dark ? '#000' : '#fff'}
                       fontSize={isMobile ? '20' : isTV ? '40' : '28'}
                       fontWeight="900"
                       transform={`rotate(${textAngle + 90}, ${textX}, ${textY})`}
@@ -233,16 +223,16 @@ const PrizeWheel = ({ onSpinComplete, playerName }) => {
               exit={{ scale: 0, rotate: 180 }}
               transition={{ type: 'spring', damping: 10 }}
             >
-              <div className="prize-value">{prizeWon}x</div>
-              <div className="prize-label">Multiplier!</div>
+              <div className="prize-value">{prizeWon}</div>
+              <div className="prize-label">per letter!</div>
             </motion.div>
           )}
         </AnimatePresence>
 
 
         <div className="wheel-instructions">
-          <p>Spin to determine your letter's multiplier!</p>
-          <p className="multiplier-hint">Higher multipliers = More points per letter</p>
+          <p>Spin to see what your letter is worth!</p>
+          <p className="multiplier-hint">Every time the letter appears, you win that much again</p>
         </div>
       </motion.div>
     </div>

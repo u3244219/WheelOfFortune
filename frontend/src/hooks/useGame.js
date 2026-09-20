@@ -27,10 +27,9 @@ export const useGame = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [letterPoints, setLetterPoints] = useState({});
   const [playedWordIds, setPlayedWordIds] = useState([]);
   const [showPrizeWheel, setShowPrizeWheel] = useState(false);
-  const [currentMultiplier, setCurrentMultiplier] = useState(1);
+  const [currentSpinValue, setCurrentSpinValue] = useState(0);
   const [pendingLetter, setPendingLetter] = useState(null);
   const [answer, setAnswer] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -52,18 +51,6 @@ export const useGame = () => {
   }, []);
 
   /**
-   * Fetch letter points from backend
-   */
-  const fetchLetterPoints = useCallback(async () => {
-    try {
-      const points = await ApiService.getLetterPoints();
-      setLetterPoints(points);
-    } catch (err) {
-      console.error('Error fetching letter points:', err);
-    }
-  }, []);
-
-  /**
    * Start a new game with selected category
    */
   const startGame = useCallback(async (category) => {
@@ -72,11 +59,6 @@ export const useGame = () => {
       setError(null);
 
       const wordData = await ApiService.getRandomWord(category, playedWordIds);
-
-      // Fetch letter points if not already loaded
-      if (Object.keys(letterPoints).length === 0) {
-        await fetchLetterPoints();
-      }
 
       // Track this word as played in the current session
       setPlayedWordIds(prev => [...prev, wordData.wordId]);
@@ -105,20 +87,16 @@ export const useGame = () => {
     } finally {
       setLoading(false);
     }
-  }, [letterPoints, fetchLetterPoints, playedWordIds]);
+  }, [playedWordIds]);
 
   /**
    * Submit a letter guess (now with prize wheel)
    */
   const guessLetter = useCallback(async (letter) => {
-    console.log('guessLetter called with:', letter, 'Status:', gameState.status, 'Already guessed:', gameState.guessedLetters);
-
     if (gameState.status !== GAME_STATUS.PLAYING) {
-      console.log('Rejected: Game not playing');
       return;
     }
     if (gameState.guessedLetters.includes(letter)) {
-      console.log('Rejected: Letter already guessed');
       return;
     }
 
@@ -130,14 +108,13 @@ export const useGame = () => {
   /**
    * Handle prize wheel spin complete
    */
-  const handleWheelSpinComplete = useCallback(async (multiplier) => {
+  const handleWheelSpinComplete = useCallback(async (spinValue) => {
     if (isProcessing) {
-      console.log('PREVENTED DUPLICATE: Already processing a guess');
       return;
     }
 
     setShowPrizeWheel(false);
-    setCurrentMultiplier(multiplier);
+    setCurrentSpinValue(spinValue);
     setIsProcessing(true);
 
     const letter = pendingLetter;
@@ -156,14 +133,11 @@ export const useGame = () => {
         currentMask: gameState.maskedWord,
       };
 
-      console.log('Making API call for letter:', letter, 'with multiplier:', multiplier);
       const response = await ApiService.submitGuess(guessRequest);
-      console.log('API Response received:', response);
 
       setGameState(prev => {
         // Double-check letter wasn't already guessed (prevent race condition)
         if (prev.guessedLetters.includes(letter)) {
-          console.log('PREVENTED DUPLICATE: Letter already in guessedLetters during state update');
           return prev; // Return unchanged state
         }
 
@@ -178,33 +152,16 @@ export const useGame = () => {
           ? 999 // Unlimited attempts for multiplayer
           : GAME_CONSTANTS.MAX_ATTEMPTS - newIncorrectLetters.length;
 
-        // Calculate score - SIMPLE: Letter Points × Occurrences × Multiplier
+        // Score, exactly as on the show: what you spun, once for every time
+        // the letter appears in the puzzle.
         const newPlayers = [...prev.players];
         if (response.correct && newPlayers.length > 0) {
-          const currentPlayerScore = prev.players[prev.currentPlayerIndex].score;
-
-          // SIMPLE calculation: Letter Points × Occurrences × Multiplier
-          const letterValue = response.letterValue || 1;
           const occurrences = response.occurrences || 1;
-          const pointsToAdd = letterValue * occurrences * multiplier;
-
-          // Debug logging - CLEAR FORMAT
-          console.log('╔════════════════════════════════════════╗');
-          console.log('║   SCORE CALCULATION                    ║');
-          console.log('╚════════════════════════════════════════╝');
-          console.log('Letter:       ', letter.toUpperCase());
-          console.log('Letter Value: ', letterValue, 'points');
-          console.log('Occurrences:  ', occurrences, 'times');
-          console.log('Multiplier:   ', multiplier + 'x');
-          console.log('────────────────────────────────────────');
-          console.log('Formula:      ', letterValue, '×', occurrences, '×', multiplier);
-          console.log('Points to Add:', pointsToAdd);
-          console.log('────────────────────────────────────────');
-          console.log('Current Score:', currentPlayerScore);
-          console.log('New Score:    ', currentPlayerScore + pointsToAdd);
-          console.log('════════════════════════════════════════\n');
-
-          newPlayers[prev.currentPlayerIndex].score = currentPlayerScore + pointsToAdd;
+          const pointsToAdd = spinValue * occurrences;
+          newPlayers[prev.currentPlayerIndex] = {
+            ...prev.players[prev.currentPlayerIndex],
+            score: prev.players[prev.currentPlayerIndex].score + pointsToAdd,
+          };
         }
 
         // Move to next player if incorrect guess (turn-based)
@@ -245,7 +202,9 @@ export const useGame = () => {
           guessedLetters: newGuessedLetters,
           incorrectLetters: newIncorrectLetters,
           remainingAttempts: newRemainingAttempts,
-          message: response.message,
+          message: response.correct
+            ? `${letter.toUpperCase()} appears ${response.occurrences} time${response.occurrences === 1 ? '' : 's'} - ${spinValue} x ${response.occurrences} = ${spinValue * response.occurrences} points`
+            : response.message,
           status: newStatus,
           players: newPlayers,
           currentPlayerIndex: nextPlayerIndex,
@@ -259,7 +218,7 @@ export const useGame = () => {
       setIsProcessing(false);
       setPendingLetter(null); // Clear pending letter to prevent reprocessing
     }
-  }, [gameState.wordId, gameState.maskedWord, letterPoints, pendingLetter, isProcessing]);
+  }, [gameState.wordId, gameState.maskedWord, pendingLetter, isProcessing]);
 
   /**
    * Reset game to initial state
@@ -314,10 +273,9 @@ export const useGame = () => {
     answer,
     loading,
     error,
-    letterPoints,
     playedWordIds,
     showPrizeWheel,
-    currentMultiplier,
+    currentSpinValue,
     initializePlayers,
     startGame,
     guessLetter,

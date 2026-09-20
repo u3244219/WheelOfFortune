@@ -23,7 +23,6 @@ const GameBoard = ({
   onPlayAgain,
   onNewCategory,
   loading,
-  letterPoints,
   showPrizeWheel,
   onWheelSpinComplete
 }) => {
@@ -117,7 +116,6 @@ const GameBoard = ({
             guessedLetters={guessedLetters}
             incorrectLetters={incorrectLetters}
             disabled={!isGameActive || loading}
-            letterPoints={letterPoints}
           />
         </div>
       </div>

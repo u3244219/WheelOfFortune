@@ -12,7 +12,7 @@ import SoundEffects from '../../utils/soundManager';
 import './Keyboard.css';
 import { GAME_CONSTANTS } from '../../constants/gameConstants';
 
-const Keyboard = ({ onLetterClick, guessedLetters, incorrectLetters, disabled, letterPoints }) => {
+const Keyboard = ({ onLetterClick, guessedLetters, incorrectLetters, disabled }) => {
   const { isTV, isMobile } = useDevice();
   const [focusedIndex, setFocusedIndex] = useState(0);
   const [activeKey, setActiveKey] = useState(null); // Track currently pressed key
@@ -22,7 +22,6 @@ const Keyboard = ({ onLetterClick, guessedLetters, incorrectLetters, disabled, l
 
   const isLetterGuessed = (letter) => guessedLetters.includes(letter);
   const isLetterIncorrect = (letter) => incorrectLetters.includes(letter);
-  const getLetterPoints = (letter) => letterPoints[letter] || 0;
 
   // TV keyboard navigation
   useKeyboardNavigation({
@@ -110,12 +109,9 @@ const Keyboard = ({ onLetterClick, guessedLetters, incorrectLetters, disabled, l
     const isDisabled = disabled || guessed;
     const isActive = activeKey === letter; // Highlight if physically pressed
 
-    const keyContent = (
-      <>
-        <span className="key-letter">{letter}</span>
-        <span className="key-points">{getLetterPoints(letter)}</span>
-      </>
-    );
+    // Letters are all worth the same now - the wheel decides the value - so
+    // the old Scrabble score badge would only mislead.
+    const keyContent = <span className="key-letter">{letter}</span>;
 
     if (isTV) {
       return (
