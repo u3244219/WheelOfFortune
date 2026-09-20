@@ -9,10 +9,11 @@
  * Add a fix here whenever you see a wrong or missing picture. Keys are
  * "CATEGORY:WORD", or just "WORD" to apply everywhere.
  *
- *   wiki   - the Wikipedia article title to use instead of the word
- *   image  - a direct image URL to use instead of whatever Wikipedia returns
- *   blurb  - a sentence to show instead of the Wikipedia one
- *   noImage- true to show the text only
+ *   wiki    - the Wikipedia article title to use instead of the word
+ *   image   - a direct image URL to use instead of whatever Wikipedia returns
+ *   blurb   - a sentence to show instead of the Wikipedia one
+ *   noImage - true to show the text only
+ *   skip    - true to skip the lookup and fall back to the game hint
  */
 
 export const ANSWER_OVERRIDES = {
@@ -31,6 +32,7 @@ export const ANSWER_OVERRIDES = {
   'ANIMAL:STICK BUG': { wiki: 'Phasmatodea' },
   'ANIMAL:MONITOR': { wiki: 'Monitor lizard' },
   'ANIMAL:BOA': { wiki: 'Boa constrictor' },
+  'ANIMAL:PYTHON': { wiki: 'Pythonidae' },
   'ANIMAL:CORAL': { wiki: 'Coral' },
   'ANIMAL:MANTIS': { wiki: 'Mantis' },
   'ANIMAL:SPONGE': { wiki: 'Sea sponge' },
@@ -65,6 +67,17 @@ export const ANSWER_OVERRIDES = {
   'SWEET:SEVIYAN': { wiki: 'Sheer khurma' },
   'SWEET:PATISA': { wiki: 'Soan papdi' },
   'SWEET:RUSK': { wiki: 'Rusk' },
+  // Candy brands: the word alone lands on the wrong thing
+  'CANDY:DOVE': { wiki: 'Dove (chocolate)' },
+  'CANDY:GALAXY': { wiki: 'Galaxy (chocolate)' },
+  'CANDY:CHUNKY': { wiki: 'Chunky (candy bar)' },
+  'CANDY:RED VINE': { wiki: 'Red Vines' },
+  'CANDY:ROGUE': { skip: true },
+  'CANDY:KINDER': { wiki: 'Kinder Chocolate' },
+  // Film posters are copyrighted, so these show the description only
+  'MOVIE:MULAN': { wiki: 'Mulan (1998 film)' },
+  'MOVIE:BRAVE': { wiki: 'Brave (2012 film)' },
+
   'COUNTRY:UNITED ARAB EMIRATES': { wiki: 'United Arab Emirates' },
   'COUNTRY:CENTRAL AFRICAN': { wiki: 'Central African Republic' },
   'COUNTRY:SAINT VINCENT': { wiki: 'Saint Vincent and the Grenadines' },

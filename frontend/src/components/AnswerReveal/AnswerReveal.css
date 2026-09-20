@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
-  margin: 0.5rem 0 1.2rem;
-  padding: 1rem;
+  gap: 0.4rem;
+  margin: 0.2rem 0 0.5rem;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 16px;
 }
 
 .answer-reveal-word {
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-size: clamp(1.25rem, 3.4vh, 2.4rem);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-align: center;
@@ -19,8 +19,8 @@
 
 .answer-reveal-image {
   width: 100%;
-  max-width: 420px;
-  max-height: 320px;
+  max-width: 100%;
+  max-height: min(300px, 28vh);
   object-fit: cover;
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.2);
@@ -46,9 +46,13 @@
   margin: 0;
   max-width: 44ch;
   text-align: center;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  line-height: 1.45;
+  font-size: clamp(0.82rem, 1.8vh, 1.05rem);
+  line-height: 1.35;
   opacity: 0.92;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .answer-reveal-source {
@@ -68,7 +72,14 @@
   to { opacity: 1; transform: none; }
 }
 
+/* Short screens - a television in landscape, a phone in landscape - give the
+   picture less room so the scores and buttons stay visible. */
+@media (max-height: 820px) {
+  .answer-reveal-image { max-height: 23vh; }
+  .answer-reveal-skeleton { height: 20vh; }
+  .answer-reveal-blurb { -webkit-line-clamp: 2; }
+}
+
 @media (max-width: 480px) {
-  .answer-reveal { padding: 0.75rem; }
-  .answer-reveal-image, .answer-reveal-skeleton { max-height: 200px; }
+  .answer-reveal { padding: 0.5rem; }
 }
