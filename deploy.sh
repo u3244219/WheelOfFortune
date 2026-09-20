@@ -25,7 +25,7 @@ fi
 # Check if remote exists
 if ! git remote | grep -q "origin"; then
     echo "🔗 Adding GitHub remote..."
-    git remote add origin https://github.com/u3244219/WheelOfFotune.git
+    git remote add origin https://github.com/u3244219/WheelOfFortune.git
     echo "✓ Remote added"
     echo ""
 fi
@@ -45,7 +45,7 @@ echo ""
 echo "✅ DEPLOYMENT COMPLETE!"
 echo ""
 echo "Your game will be live at:"
-echo "https://u3244219.github.io/WheelOfFotune"
+echo "https://u3244219.github.io/WheelOfFortune"
 echo ""
 echo "Wait 1-2 minutes, then visit the URL above!"
 echo ""
