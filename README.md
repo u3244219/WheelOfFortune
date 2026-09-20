@@ -63,6 +63,38 @@ All endpoints sit under `/api/words`:
 
 Full request and response shapes are in `docs/API_DOCUMENTATION.md`.
 
+## The word bank
+
+`scripts/normalize_words.py` is the single source of truth. It merges anything
+in `scripts/word_additions.py`, removes duplicate word and category pairs,
+sorts everything, and rewrites both `frontend/public/V2__Insert_sample_data_SQLite.sql`
+(the file the game actually reads) and the MySQL migration.
+
+To add words, put them in `scripts/word_additions.py` and run:
+
+```bash
+python3 scripts/normalize_words.py
+```
+
+Words already in the bank are ignored, so it is safe to re-run. Use
+`--check` to report duplicates without rewriting anything.
+
+Each category is dealt from a shuffled deck rather than picked at random, and
+the position is kept in the browser, so every word in a category is played
+before any of them comes round again.
+
+## The answer reveal
+
+When a round ends, the result screen shows the answer with a picture and a one
+line explanation, looked up live from Wikipedia. No API key and no backend:
+the MediaWiki API allows anonymous cross origin requests, and results are
+cached in the browser so a repeated word appears instantly.
+
+When a lookup picks the wrong article - MOLE the animal versus the mole on
+your arm - add a correction to `frontend/src/data/answerOverrides.js`. Films
+and candy brands are deliberately text only, since those images are
+copyrighted.
+
 ## Deployment
 
 `deploy-windows.ps1` and `deploy.sh` push the repository to GitHub. The

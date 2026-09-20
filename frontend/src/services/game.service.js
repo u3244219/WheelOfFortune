@@ -60,6 +60,15 @@ class GameService {
   }
 
   /**
+   * The word currently in play, in full. Used by the reveal card so the
+   * players can see what the answer was, especially after a loss.
+   * @returns {string}
+   */
+  getAnswer() {
+    return this.currentWord || '';
+  }
+
+  /**
    * Create a masked version of the word
    * @param {string} word - The word to mask
    * @param {Array<string>} revealedLetters - Letters to reveal

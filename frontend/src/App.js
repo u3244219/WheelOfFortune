@@ -22,6 +22,7 @@ function App() {
   const { categories, loading: categoriesLoading, error: categoriesError } = useCategories();
   const {
     gameState,
+    answer,
     loading: gameLoading,
     error: gameError,
     initializePlayers,
@@ -156,6 +157,7 @@ function App() {
       <SoundToggle />
       <GameBoard
         gameState={gameState}
+        answer={answer}
         onLetterClick={handleLetterClick}
         onPlayAgain={handlePlayAgain}
         onNewCategory={handleNewCategory}

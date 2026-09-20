@@ -32,6 +32,7 @@ export const useGame = () => {
   const [showPrizeWheel, setShowPrizeWheel] = useState(false);
   const [currentMultiplier, setCurrentMultiplier] = useState(1);
   const [pendingLetter, setPendingLetter] = useState(null);
+  const [answer, setAnswer] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
   /**
@@ -80,6 +81,9 @@ export const useGame = () => {
       // Track this word as played in the current session
       setPlayedWordIds(prev => [...prev, wordData.wordId]);
 
+      // Remember the full answer so the reveal card can show it, win or lose
+      setAnswer(ApiService.revealAnswer());
+
       setGameState(prev => ({
         ...prev,
         status: GAME_STATUS.PLAYING,
@@ -95,6 +99,7 @@ export const useGame = () => {
         message: 'Good luck!',
       }));
     } catch (err) {
+      setAnswer('');
       setError(err.message || 'Failed to start game');
       console.error('Error starting game:', err);
     } finally {
@@ -275,6 +280,7 @@ export const useGame = () => {
       players: prev.players,
       currentPlayerIndex: 0,
     }));
+    setAnswer('');
     setError(null);
   }, []);
 
@@ -297,6 +303,7 @@ export const useGame = () => {
       players: [],
       currentPlayerIndex: 0,
     });
+    setAnswer('');
     setError(null);
     // Clear played words for new game session
     setPlayedWordIds([]);
@@ -304,6 +311,7 @@ export const useGame = () => {
 
   return {
     gameState,
+    answer,
     loading,
     error,
     letterPoints,
