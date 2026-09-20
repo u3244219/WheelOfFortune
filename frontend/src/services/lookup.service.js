@@ -13,7 +13,7 @@
 import { lookupOverride } from '../data/answerOverrides';
 
 const API = 'https://en.wikipedia.org/w/api.php';
-const CACHE_PREFIX = 'wof.answer.v1.';
+const CACHE_PREFIX = 'wof.answer.v2.';
 const CACHE_DAYS = 60;
 const TIMEOUT_MS = 6000;
 
@@ -119,11 +119,23 @@ const searchTitle = async (word, category) => {
   return hit ? hit.title : null;
 };
 
-/** Only ever render images served by Wikimedia. */
-const safeImage = (url) =>
-  typeof url === 'string' && url.startsWith('https://upload.wikimedia.org/')
-    ? url
-    : null;
+// Wikimedia serves thumbnails from more than one host - thumb.wikimedia.org
+// for most pages, upload.wikimedia.org for others - so match the domain
+// rather than one prefix, or most pictures get thrown away.
+const WIKIMEDIA_HOSTS = /(^|\.)wikimedia\.org$/;
+
+/** Only ever render images served by Wikimedia, over https. */
+const safeImage = (url) => {
+  if (typeof url !== 'string') return null;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' && WIKIMEDIA_HOSTS.test(parsed.hostname)
+      ? url
+      : null;
+  } catch (err) {
+    return null;
+  }
+};
 
 const trimBlurb = (extract, word) => {
   if (!extract) return '';
