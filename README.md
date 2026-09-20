@@ -121,8 +121,16 @@ frontend deploys to GitHub Pages at
 - `docs/GITHUB_PAGES_DEPLOYMENT.md` — frontend deployment
 - `docs/GAME_ENHANCEMENTS_RESEARCH.md` — ideas and research for future gameplay features
 
-## A note on credentials
+## Credentials
 
-`application.properties` currently carries the MySQL username and password in
-plain text. Before this repository goes anywhere public, move them to
-environment variables (`SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD`).
+The backend reads its database login from the environment, so nothing secret
+lives in the repository:
+
+```bash
+set DB_USER=adeel
+set DB_PASSWORD=your-password
+```
+
+Never paste a password or an access token into a tracked file. GitHub scans
+every push and will block it, and anything already pushed has to be treated as
+compromised and rotated.
